@@ -62,7 +62,6 @@ The cleaning pipeline handles common real-world data issues such as duplicate re
 
 ## Project Structure
 
-## Project Structure
 
 ```text
 project/
