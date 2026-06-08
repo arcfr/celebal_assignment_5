@@ -1,4 +1,4 @@
-# Employee Data Cleaning and Transformation and applying filtering and aggregation using PySpark
+# Celebal week 5 assignment - Employee Data Cleaning and Transformation and applying filtering and aggregation using PySpark
 
 ## Overview
 
@@ -62,7 +62,6 @@ The cleaning pipeline handles common real-world data issues such as duplicate re
 
 ## Project Structure
 
-## Project Structure
 
 ```text
 project/
@@ -91,11 +90,11 @@ project/
 * **data_cleaning.py** → Handles duplicate removal, null handling, standardization, datatype conversion, and imputation.
 * **data_queries.py** → Contains Spark queries for analysis and insights.
 * **run_pipeline.py** → Main pipeline script to execute the workflow.
-* **outputs/** → Stores generated assignment outputs.
+* **outputs/** → Contains the word file with the assignment outputs.
 * **data/** → Contains the raw employee dataset.
 
 ```
 
-### Author
+Author
 
-**Archit Sahay**
+Archit Sahay
