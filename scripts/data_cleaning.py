@@ -1,16 +1,12 @@
 from pyspark.sql.functions import *
 import builtins
-
-
 def clean_data(df):
 
     print("Data Cleaning")
 
     cleaning_report = {}
 
-    # ==================================
-    # REMOVE DUPLICATES
-    # ==================================
+    #remove duplicates
 
     print("\nRemoving Duplicates")
 
@@ -20,28 +16,18 @@ def clean_data(df):
 
     final = df.count()
 
-    duplicates_removed = (
-        initial - final
-    )
+    duplicates_removed = initial - final
 
-    cleaning_report[
-        "Duplicates Removed"
-    ] = duplicates_removed
+    cleaning_report["Duplicates Removed"] = duplicates_removed
 
     print(
         "Duplicates Removed:",
         duplicates_removed
     )
-
-    # ==================================
-    # REPLACE EMPTY VALUES
-    # ==================================
-
+    #replace empty values with Null
     df = df.replace("", None)
 
-    # ==================================
-    # INVALID CATEGORICAL VALUES
-    # ==================================
+    #handle invalid categorical values
 
     invalid_values = [
         "nan",
@@ -75,6 +61,8 @@ def clean_data(df):
             )
         ).count()
     )
+
+    #clean 
 
     df = df.withColumn(
         "Status",
@@ -124,9 +112,7 @@ def clean_data(df):
         performance_invalid_count
     )
 
-    # ==================================
-    # SALARY CLEANING
-    # ==================================
+    #salary cleaning
 
     invalid_salary = [
         "n/a",
@@ -134,7 +120,7 @@ def clean_data(df):
         "null",
         ""
     ]
-
+    #count befire cleaning
     salary_invalid_count = (
         df.filter(
             lower(
@@ -175,10 +161,7 @@ def clean_data(df):
         "Salary Cleaned"
     ] = salary_invalid_count
 
-    # ==================================
-    # TEXT STANDARDIZATION
-    # ==================================
-
+    # standardize text 
     df = df.withColumn(
         "Status",
         lower(
@@ -199,9 +182,7 @@ def clean_data(df):
         )
     )
 
-    # ==================================
-    # DATE CLEANING
-    # ==================================
+    #date cleaning
 
     df = df.withColumn(
         "Join_Date",
@@ -232,9 +213,7 @@ def clean_data(df):
         ).cast("date")
     )
 
-    # ==================================
-    # SPLIT COLUMN
-    # ==================================
+    #split column
 
     df = df.withColumn(
         "Department",
@@ -266,9 +245,7 @@ def clean_data(df):
         )
     )
 
-    # ==================================
-    # MEAN IMPUTATION
-    # ==================================
+    # Mean imputation
 
     age_missing_before = (
         df.filter(
@@ -315,9 +292,7 @@ def clean_data(df):
         salary_missing_before
     )
 
-    # ==================================
-    # MODE IMPUTATION
-    # ==================================
+    #Mode imputation
 
     status_missing_before = (
         df.filter(
@@ -440,18 +415,14 @@ def clean_data(df):
         "Region Imputed"
     ] = region_missing_before
 
-    # ==================================
-    # RENAME COLUMN
-    # ==================================
+    # Rename Column 
 
     df = df.withColumnRenamed(
         "Salary",
-        "Monthly_Salary"
+        "Monthly Salary"
     )
 
-    # ==================================
-    # CLEANING SUMMARY
-    # ==================================
+    #Data Cleaning
 
     print("\nCleaning Summary")
 
